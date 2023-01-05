@@ -58,3 +58,6 @@ group :development do
   # gem "spring"
 end
 
+  gem 'mongoid'
+
+gem "ruby-lsp", "~> 0.3.7", :group => :development
