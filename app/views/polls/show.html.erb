@@ -1,6 +1,21 @@
 <p style="color: green"><%= notice %></p>
+<div id="<%= dom_id @poll %>">
+  <p>
+    <strong>Question:</strong>
+    <%= @poll.question %>
+  </p>
+  <p> All votes: <%= @poll.votes.count %> </p>
+  <% @poll.poll_answers.each do |pa| %>
+    <% if pa.votes.any? %>
+      <p> <%= pa.answer %> <%= (pa.votes.count.to_f/@poll.votes.count.to_f*100).to_i %>% (<%= pa.votes.count %>)</p>
+    <% else %>
+    <p> <%= pa.answer %> (<%= pa.votes.count %>)</p>
 
-<%= render @poll %>
+    <% end %>
+
+  <%end %>
+
+</div>
 
 <div>
   <%= link_to "Add answer to this pool", new_poll_poll_answer_path(@poll) %> |

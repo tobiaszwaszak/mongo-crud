@@ -4,4 +4,5 @@ class Poll
   field :question, type: String
   has_many :poll_answers
   has_many :votes
+  belongs_to :user
 end

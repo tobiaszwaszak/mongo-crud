@@ -1,10 +1,10 @@
 class PollsController < ApplicationController
   before_action :set_poll, only: %i[ show edit update destroy ]
-
+  skip_before_action :authenticate_user!, only: [:show]
   # GET /polls or /polls.json
   def index
-    @polls = Poll.all
-  end
+    @polls = Poll.includes(:votes).where(user_id: current_user.id).or(Poll.includes(:votes).where(votes: {user_id: current_user.id}))
+      end
 
   # GET /polls/1 or /polls/1.json
   def show
@@ -21,7 +21,7 @@ class PollsController < ApplicationController
 
   # POST /polls or /polls.json
   def create
-    @poll = Poll.new(poll_params)
+    @poll = Poll.new(poll_params.merge(user_id: current_user.id))
 
     respond_to do |format|
       if @poll.save
