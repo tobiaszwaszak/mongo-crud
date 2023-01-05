@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+<div id="<%= dom_id @poll %>">
+  <p>
+    <strong>Question:</strong>
+    <%= @poll.question %>
+  </p>
+  <p> All votes: <%= @poll.votes.count %> </p>
+  <% @poll.poll_answers.each do |pa| %>
+   <p> <%= pa.answer %> <%= (pa.votes.count.to_f/@poll.votes.count.to_f*100).to_i %>% (<%= pa.votes.count %>)</p>
+
+  <%end %>
+
+</div>
+<%= link_to "New poll", new_poll_path %>
+<%= link_to "Back to polls", polls_path %>

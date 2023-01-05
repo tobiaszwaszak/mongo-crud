@@ -1,0 +1,10 @@
+<div id="<%= dom_id poll %>">
+  <p>
+    <strong>Question:</strong>
+    <%= poll.question %>
+  </p>
+<% poll.poll_answers.each do |pa| %>
+    <%= button_to pa.answer, poll_poll_answer_votes_path(poll_id: poll.id, poll_answer_id: pa.id), method: :post %>
+  <%end %>
+
+</div>
